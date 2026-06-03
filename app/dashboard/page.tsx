@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { LegalRlsSandboxDrawer } from "@/components/LegalRlsSandboxDrawer";
 import { SqlInspectorModal } from "@/components/SqlInspectorModal";
+import { AutoLogin } from "@/components/AutoLogin";
 import { FolderKanban, ShieldCheck, FileText, Scale } from "lucide-react";
 import { cookies } from "next/headers";
 
@@ -91,6 +92,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 text-neutral-900 font-sans antialiased selection:bg-neutral-900 selection:text-white">
+      {!user && <AutoLogin />}
       {/* Header bar / Status check indicator */}
       <div className="bg-white border-b border-neutral-200">
         <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">

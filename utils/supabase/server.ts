@@ -39,8 +39,8 @@ export const isRealClient = !!(supabaseUrl && supabaseAnonKey);
 
 export async function createClient() {
   const cookieStore = await cookies();
-  // Default to 'logged-out' if no session cookie exists yet, ensuring blank states on initial load
-  const email = cookieStore.get("sb-mock-email")?.value || "logged-out";
+  // Default to 'apex@legal.com' if no session cookie exists yet, ensuring auto-login on first load
+  const email = cookieStore.get("sb-mock-email")?.value || "apex@legal.com";
 
   // Graceful Fallback Mode if Env variables are missing
   if (!isRealClient) {
