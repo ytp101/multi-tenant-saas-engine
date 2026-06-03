@@ -16,7 +16,11 @@ export const metadata: Metadata = {
   title: "Legal Case SaaS — RLS Multi-Tenant Sandbox",
   description: "A Zero-Trust multi-tenant legal dashboard demonstrating PostgreSQL Row Level Security (RLS) policies.",
   icons: {
-    icon: "/favicon.svg?v=1",
+    icon: [
+      { url: "/favicon.ico?v=1", type: "image/x-icon" },
+      { url: "/favicon.png?v=1", type: "image/png" },
+      { url: "/favicon.svg?v=1", type: "image/svg+xml" },
+    ],
   },
 };
 
@@ -31,6 +35,8 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico?v=1" />
+        <link rel="icon" type="image/png" href="/favicon.png?v=1" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=1" />
       </head>
       <body className="min-h-full flex flex-col">{children}</body>
