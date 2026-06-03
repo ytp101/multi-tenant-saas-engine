@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Multi-Tenant SaaS Engine 
 
-## Getting Started
+> An enterprise-grade backend architecture demonstrating a zero-trust, multi-tenant database environment powered by PostgreSQL Row Level Security (RLS).
 
-First, run the development server:
+## Executive Summary
+The Multi-Tenant SaaS Engine is a purpose-built database architecture showcasing a best-in-class backend layer. Engineered to handle secure, compartmentalized data for SaaS applications, this infrastructure guarantees strict tenant isolation at the database level, bypassing the vulnerabilities of traditional client-side filtering.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This asset was architected with a heavy bias toward data security, automated provisioning, and optimized server-side querying.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## The Tech Stack
+*   **Database Engine:** PostgreSQL (via Supabase)
+*   **Security Architecture:** Row Level Security (RLS) & Supabase Auth
+*   **Automation:** Postgres PL/pgSQL Database Triggers
+*   **Application Layer:** Next.js 14 (Server Components)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Core Infrastructure & Architectural Strategy
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Zero-Trust Data Isolation (RLS)
+*   **Technology Used:** Advanced PostgreSQL Row Level Security policies tied to a `SECURITY DEFINER` context-wrapping function.
+*   **The Business Purpose:** Data leaks destroy SaaS companies. By hard-coding security policies directly into the Postgres engine, it becomes mathematically impossible for a tenant to query or mutate another organization's data, regardless of frontend vulnerabilities or API flaws. 
 
-## Learn More
+### 2. Zero-Touch Onboarding Automation
+*   **Technology Used:** Postgres `AFTER INSERT` event triggers and PL/pgSQL functions.
+*   **The Business Purpose:** Reduces server round-trips and mitigates race conditions during user signup. The database autonomously intercepts authentication events to provision tenant workspaces and map roles, keeping the frontend application layer extremely lean and performant.
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Server-Side Data Orchestration
+*   **Technology Used:** Next.js App Router (Server Components) and `@supabase/ssr`.
+*   **The Business Purpose:** Fetches data entirely on the server edge, utilizing the underlying RLS policies to implicitly filter data without complex query logic. This eliminates client-side data exposure and drastically improves initial load times (TTFB).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+*** 
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Architected and maintained by Yodsran Phiewpong.**
