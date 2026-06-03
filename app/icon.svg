@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Sleek rounded slate background -->
+  <rect width="32" height="32" rx="8" fill="#0f172a"/>
+  <!-- Scaled Shield symbol in Indigo -->
+  <path d="M16 6L24 9.5V16C24 20.8 20.6 24.8 16 26C11.4 24.8 8 20.8 8 16V9.5L16 6Z" fill="none" stroke="#6366f1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Inner Emerald Success Check representing RLS validation -->
+  <path d="M12 15.5L15 18.5L20 12.5" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
