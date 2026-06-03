@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Legal Case SaaS — RLS Multi-Tenant Sandbox",
   description: "A Zero-Trust multi-tenant legal dashboard demonstrating PostgreSQL Row Level Security (RLS) policies.",
+  icons: {
+    icon: "/favicon.svg?v=1",
+  },
 };
 
 export default function RootLayout({
@@ -28,7 +31,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
-        <link rel="icon" type="image/x-icon" href="/favicon.svg" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=1" />
       </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

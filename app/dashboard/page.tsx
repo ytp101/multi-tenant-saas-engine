@@ -67,11 +67,23 @@ export default async function DashboardPage() {
     errorMessage = err?.message || "Unknown database fetch exception.";
   }
 
+  const normalizeTier = (tier: string) => {
+    if (!tier || tier === "—") return "—";
+    const t = tier.toLowerCase();
+    if (t === "enterprise" || t === "enterprise tier") {
+      return "Enterprise Tier";
+    }
+    if (t === "pro" || t === "pro tier") {
+      return "Pro Tier";
+    }
+    return tier.charAt(0).toUpperCase() + tier.slice(1);
+  };
+
   // Fallback defaults to prevent crashes (displaying blank spaces as requested)
   const userEmail = user?.email || "—";
   const tenantName = tenant?.name || "—";
   const tenantId = tenant?.id || "—";
-  const tenantTier = tenant?.tier || "—";
+  const tenantTier = normalizeTier(tenant?.tier || "—");
   const profileId = profile?.id || "—";
   const profileRole = profile?.role || "—";
   const subscriptionStatus = subscription?.status || "—";

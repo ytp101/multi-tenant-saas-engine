@@ -22,6 +22,18 @@ import {
 } from "@/components/ui/card";
 import { Scale, KeyRound, Loader2, CheckCircle2, ShieldAlert } from "lucide-react";
 
+const normalizeTier = (tier: string) => {
+  if (!tier) return "—";
+  const t = tier.toLowerCase();
+  if (t === "enterprise" || t === "enterprise tier") {
+    return "Enterprise Tier";
+  }
+  if (t === "pro" || t === "pro tier") {
+    return "Pro Tier";
+  }
+  return tier.charAt(0).toUpperCase() + tier.slice(1);
+};
+
 export function LegalRlsSandboxDrawer() {
   const router = useRouter();
   const supabase = createClient();
@@ -29,6 +41,7 @@ export function LegalRlsSandboxDrawer() {
   const [activeEmail, setActiveEmail] = React.useState<string>("apex@legal.com");
   const [loadingEmail, setLoadingEmail] = React.useState<string | null>(null);
   const [isOpen, setIsOpen] = React.useState(false);
+  const [dbTenants, setDbTenants] = React.useState<any[]>([]);
 
   // Sync active impersonated tenant status from cookies
   React.useEffect(() => {
@@ -39,6 +52,21 @@ export function LegalRlsSandboxDrawer() {
       }
     }
   }, [isOpen]);
+
+  // Fetch real tenant tier data via Supabase client
+  React.useEffect(() => {
+    async function fetchDbTenants() {
+      try {
+        const { data } = await supabase.from("tenants").select("*");
+        if (data) {
+          setDbTenants(data);
+        }
+      } catch (err) {
+        console.error("Error fetching db tenants:", err);
+      }
+    }
+    fetchDbTenants();
+  }, [activeEmail, isOpen]);
 
   const switchFirmContext = async (firmEmail: string) => {
     setLoadingEmail(firmEmail);
@@ -73,6 +101,7 @@ export function LegalRlsSandboxDrawer() {
 
   const firmProfiles = [
     {
+      id: "9cc09be5-054a-4525-b470-d0aa367c33e4",
       name: "Apex Legal Partners",
       email: "apex@legal.com",
       tier: "Enterprise Tier",
@@ -80,6 +109,7 @@ export function LegalRlsSandboxDrawer() {
       color: "border-neutral-900 bg-neutral-50/50",
     },
     {
+      id: "2beabf42-9654-463d-a24b-b06f1619bbcd",
       name: "Boutique Law Group",
       email: "boutique@legal.com",
       tier: "Pro Tier",
@@ -124,6 +154,15 @@ export function LegalRlsSandboxDrawer() {
               const isActive = activeEmail === firm.email;
               const isLoading = loadingEmail === firm.email;
 
+              // Match tenant from real database fetch
+              const dbTenant = dbTenants.find(
+                (t) =>
+                  t.id === firm.id ||
+                  t.name?.toLowerCase().includes(firm.name.split(" ")[0].toLowerCase())
+              );
+              const displayName = dbTenant?.name || firm.name;
+              const displayTier = normalizeTier(dbTenant?.tier || firm.tier);
+
               return (
                 <Card
                   key={firm.email}
@@ -135,17 +174,17 @@ export function LegalRlsSandboxDrawer() {
                     <div className="flex items-start justify-between">
                       <div>
                         <CardTitle className="text-sm font-black text-neutral-950">
-                          {firm.name}
+                          {displayName}
                         </CardTitle>
                         <CardDescription className="text-[10px] font-mono mt-0.5">
                           {firm.email}
                         </CardDescription>
                       </div>
                       <Badge
-                        variant={firm.tier === "Enterprise Tier" ? "default" : "secondary"}
+                        variant={displayTier === "Enterprise Tier" ? "default" : "secondary"}
                         className="text-[9px] uppercase tracking-wide font-black"
                       >
-                        {firm.tier}
+                        {displayTier}
                       </Badge>
                     </div>
                   </CardHeader>
@@ -172,7 +211,7 @@ export function LegalRlsSandboxDrawer() {
                           Resync Session
                         </>
                       ) : (
-                        `Authenticate as ${firm.name}`
+                        `Authenticate as ${displayName}`
                       )}
                     </Button>
                   </CardContent>
