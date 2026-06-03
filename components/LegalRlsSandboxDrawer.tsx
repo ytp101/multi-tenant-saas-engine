@@ -122,9 +122,9 @@ export function LegalRlsSandboxDrawer() {
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <Button
-          className="bg-neutral-900 text-white hover:bg-neutral-850 border border-neutral-900 transition-all gap-2 flex items-center font-bold"
+          className="bg-neutral-900 text-white hover:bg-neutral-850 border border-neutral-900 transition-all gap-1.5 sm:gap-2 flex items-center font-bold text-[10px] sm:text-xs md:text-sm whitespace-nowrap shrink-0"
         >
-          <Scale className="h-4.5 w-4.5" />
+          <Scale className="h-3.5 w-3.5 sm:h-4.5 sm:w-4.5 shrink-0" />
           Launch Legal RLS Demo
         </Button>
       </SheetTrigger>

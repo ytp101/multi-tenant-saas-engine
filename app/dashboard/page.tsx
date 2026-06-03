@@ -1,6 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { LegalRlsSandboxDrawer } from "@/components/LegalRlsSandboxDrawer";
+import { SqlInspectorModal } from "@/components/SqlInspectorModal";
 import { FolderKanban, ShieldCheck, FileText, Scale } from "lucide-react";
 import { cookies } from "next/headers";
 
@@ -186,9 +187,10 @@ export default async function DashboardPage() {
                 Tenant ID: {tenantId}
               </p>
             </div>
-            <div className="mt-2 md:mt-0 flex items-center gap-3">
+            <div className="mt-2 md:mt-0 flex items-center gap-2 sm:gap-3 flex-wrap sm:flex-nowrap">
+              <SqlInspectorModal />
               <LegalRlsSandboxDrawer />
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold bg-neutral-950 text-white rounded-full border border-neutral-950">
+              <span className="inline-flex items-center gap-1.5 px-2 sm:px-3 py-1 text-[10px] sm:text-xs font-bold bg-neutral-950 text-white rounded-full border border-neutral-950 whitespace-nowrap shrink-0">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                 Context Enforced
               </span>
