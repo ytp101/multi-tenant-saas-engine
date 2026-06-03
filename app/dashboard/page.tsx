@@ -1,7 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { LegalRlsSandboxDrawer } from "@/components/LegalRlsSandboxDrawer";
-import { FolderKanban, ShieldCheck, FileText } from "lucide-react";
+import { FolderKanban, ShieldCheck, FileText, Scale } from "lucide-react";
 import { cookies } from "next/headers";
 
 // Ensuring dynamic rendering since it relies on authentication session
@@ -83,8 +83,9 @@ export default async function DashboardPage() {
         <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-xs font-bold tracking-wider text-neutral-500 uppercase">
-              Legal Case SaaS
+            <span className="text-xs font-bold tracking-wider text-neutral-500 uppercase flex items-center gap-1.5">
+              <Scale className="h-3.5 w-3.5 text-neutral-800" />
+              Legal Case SaaS <span className="bg-neutral-100 text-neutral-600 border border-neutral-200 px-1.5 py-0.5 rounded text-[9px] font-black tracking-normal uppercase ml-1">Demo</span>
             </span>
           </div>
           <div className="text-xs text-neutral-500 font-medium">
