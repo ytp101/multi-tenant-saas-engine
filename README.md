@@ -28,5 +28,5 @@ This asset was architected with a heavy bias toward data security, automated pro
 *   **The Business Purpose:** Fetches data entirely on the server edge, utilizing the underlying RLS policies to implicitly filter data without complex query logic. This eliminates client-side data exposure and drastically improves initial load times (TTFB).
 
 *** 
-
+website link: https://multi-tenant-saas-engine.vercel.app/dashboard
 **Architected and maintained by Yodsran Phiewpong.**
